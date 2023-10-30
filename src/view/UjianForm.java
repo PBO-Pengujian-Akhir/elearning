@@ -68,7 +68,7 @@ public class UjianForm extends javax.swing.JFrame {
         deleteUjianButton = new javax.swing.JButton();
         updateUjianButton = new javax.swing.JButton();
         showUjianButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        backMenuButton = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -159,8 +159,13 @@ public class UjianForm extends javax.swing.JFrame {
         });
         getContentPane().add(showUjianButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 400, -1, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/backtButton.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, -1, -1));
+        backMenuButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/backtButton.png"))); // NOI18N
+        backMenuButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backMenuButtonMouseClicked(evt);
+            }
+        });
+        getContentPane().add(backMenuButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, -1, -1));
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/dashboardForm.png"))); // NOI18N
         getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -217,6 +222,15 @@ public class UjianForm extends javax.swing.JFrame {
         table();
     }//GEN-LAST:event_showUjianButtonMouseClicked
 
+    private void backMenuButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMenuButtonMouseClicked
+        MenuDosen menuDosen = new MenuDosen();
+        menuDosen.setVisible(true);
+        menuDosen.pack();
+        menuDosen.setLocationRelativeTo(null);
+        menuDosen.setDefaultCloseOperation(MenuDosen.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_backMenuButtonMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -257,11 +271,11 @@ public class UjianForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel backMenuButton;
     private javax.swing.JLabel background;
     private javax.swing.JButton createUjianButton;
     private javax.swing.JTable dataTable;
     private javax.swing.JButton deleteUjianButton;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField keteranganField;
     private javax.swing.JLabel keteranganName;

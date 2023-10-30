@@ -118,7 +118,11 @@ public class MenuMahasiswa extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuMahasiswa().setVisible(true);
+                MenuMahasiswa menuMahasiswa = new MenuMahasiswa();
+                menuMahasiswa.setVisible(true);
+                menuMahasiswa.pack();
+                menuMahasiswa.setLocationRelativeTo(null);
+                menuMahasiswa.setDefaultCloseOperation(MenuMahasiswa.EXIT_ON_CLOSE);
             }
         });
     }

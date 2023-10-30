@@ -6,12 +6,15 @@ package view;
 
 import controller.LoginController;
 
+import java.awt.*;
+
 /**
  *
  * @author fauza
  */
 public class Login extends javax.swing.JFrame {
-    
+
+
     public Login() {
         initComponents();
     }

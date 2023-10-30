@@ -89,7 +89,7 @@ public final class PenugasanForm extends javax.swing.JFrame {
         closeButton = new javax.swing.JLabel();
         titleDashboard = new javax.swing.JLabel();
         dateButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        backMenuButton = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
         dateChooser1.setForeground(new java.awt.Color(0, 155, 76));
@@ -210,8 +210,13 @@ public final class PenugasanForm extends javax.swing.JFrame {
         });
         getContentPane().add(dateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 340, 30, 30));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/backtButton.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, -1, -1));
+        backMenuButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/backtButton.png"))); // NOI18N
+        backMenuButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backMenuButtonMouseClicked(evt);
+            }
+        });
+        getContentPane().add(backMenuButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, -1, -1));
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/dashboardForm.png"))); // NOI18N
         background.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -304,6 +309,15 @@ public final class PenugasanForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_updateTugasButtonMouseClicked
 
+    private void backMenuButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMenuButtonMouseClicked
+        MenuDosen menuDosen = new MenuDosen();
+        menuDosen.setVisible(true);
+        menuDosen.pack();
+        menuDosen.setLocationRelativeTo(null);
+        menuDosen.setDefaultCloseOperation(MenuDosen.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_backMenuButtonMouseClicked
+
     /*
      * @param args the command line arguments
      */
@@ -349,13 +363,18 @@ public final class PenugasanForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PenugasanForm().setVisible(true);
+                PenugasanForm penugasanForm = new PenugasanForm();
+                penugasanForm.setVisible(true);
+                penugasanForm.pack();
+                penugasanForm.setLocationRelativeTo(null);
+                penugasanForm.setDefaultCloseOperation(PenugasanForm.EXIT_ON_CLOSE);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField assignment;
+    private javax.swing.JLabel backMenuButton;
     private javax.swing.JLabel background;
     private javax.swing.JLabel closeButton;
     private javax.swing.JButton createTugasButton;
@@ -367,7 +386,6 @@ public final class PenugasanForm extends javax.swing.JFrame {
     private javax.swing.JButton deleteTugasButton;
     private javax.swing.JTextField deskripsiField;
     private javax.swing.JLabel deskripsiName;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> matakuliah;
     private javax.swing.JLabel matakuliahName;

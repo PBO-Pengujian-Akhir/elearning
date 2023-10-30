@@ -22,10 +22,8 @@ public class Dosen extends User{
             Database.resultSet = Database.preparedStatement.executeQuery();
 
             if (Database.resultSet.next()) {
-                JOptionPane.showMessageDialog(null, "Login berhasil!");
                 return true;
             } else {
-                JOptionPane.showMessageDialog(null, "Login gagal!");
                 return false;
             }
         } catch (Exception e) {

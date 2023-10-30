@@ -95,7 +95,7 @@ public class TugasForm extends javax.swing.JFrame {
         statusText = new javax.swing.JLabel();
         statusField = new javax.swing.JTextField();
         tampilkanTugasButton = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        backMenuButton = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -181,8 +181,13 @@ public class TugasForm extends javax.swing.JFrame {
         });
         getContentPane().add(tampilkanTugasButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 400, -1, 30));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/backtButton.png"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, -1, -1));
+        backMenuButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/backtButton.png"))); // NOI18N
+        backMenuButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backMenuButtonMouseClicked(evt);
+            }
+        });
+        getContentPane().add(backMenuButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, -1, -1));
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/dashboardForm.png"))); // NOI18N
         getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 700));
@@ -242,6 +247,15 @@ public class TugasForm extends javax.swing.JFrame {
         MatakuliahController.createPengumpulanTugas(idPengumpulan, lampiran, deadline.toString(), status, idTugas, idMahasiswa);
     }//GEN-LAST:event_kumpulButtonMouseClicked
 
+    private void backMenuButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMenuButtonMouseClicked
+        MenuMahasiswa menuMahasiswa = new MenuMahasiswa();
+        menuMahasiswa.setVisible(true);
+        menuMahasiswa.pack();
+        menuMahasiswa.setLocationRelativeTo(null);
+        menuMahasiswa.setDefaultCloseOperation(MenuMahasiswa.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_backMenuButtonMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -273,18 +287,23 @@ public class TugasForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TugasForm().setVisible(true);
+                TugasForm tugasForm = new TugasForm();
+                tugasForm.setVisible(true);
+                tugasForm.pack();
+                tugasForm.setLocationRelativeTo(null);
+                tugasForm.setDefaultCloseOperation(TugasForm.EXIT_ON_CLOSE);
+                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel backMenuButton;
     private javax.swing.JLabel background;
     private javax.swing.JTextField fileTugasField;
     private javax.swing.JButton fileUpload;
     private javax.swing.JTextField idTugasField;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;

@@ -53,7 +53,6 @@ public class Penugasan {
             int rowsAffected = Database.preparedStatement.executeUpdate();
 
             if (rowsAffected > 0) {
-                Database.disconnect();
                 JOptionPane.showMessageDialog(null, "Penugasan berhasil dibuat!");
             }
         } catch (SQLException e) {
@@ -71,11 +70,9 @@ public class Penugasan {
             int rowsAffected = Database.preparedStatement.executeUpdate();
 
             if (rowsAffected > 0) {
-                Database.disconnect();
                 JOptionPane.showMessageDialog(null, "Penugasan berhasil dihapus!");
             }
         } catch (SQLException e) {
-            Database.disconnect();
             JOptionPane.showMessageDialog(null, "Penugasan gagal dihapus! " + e.getMessage());
         }
     }
@@ -92,11 +89,10 @@ public class Penugasan {
             int rowsAffected = Database.preparedStatement.executeUpdate();
 
             if (rowsAffected > 0) {
-                Database.disconnect();
+                
                 JOptionPane.showMessageDialog(null, "Penugasan berhasil diupdate!");
             }
-        } catch (SQLException e) {
-            Database.disconnect();
+        } catch (SQLException e) {;
             JOptionPane.showMessageDialog(null, "Penugasan gagal diupdate! " + e.getMessage());
         }
     }

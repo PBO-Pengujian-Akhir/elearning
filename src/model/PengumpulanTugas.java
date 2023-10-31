@@ -58,11 +58,9 @@ public class PengumpulanTugas {
             int rowsAffected = Database.preparedStatement.executeUpdate();
 
             if (rowsAffected > 0) {
-                Database.disconnect();
                 JOptionPane.showMessageDialog(null, "Pengumpulan tugas berhasil dibuat!");
             }
         } catch (SQLException e) {
-            Database.disconnect();
             JOptionPane.showMessageDialog(null, "Pengumpulan tugas gagal dibuat! " + e.getMessage());
         }
     }

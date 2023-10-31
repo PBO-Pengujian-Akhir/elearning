@@ -49,10 +49,8 @@ public class Matakuliah {
 
             if (Database.resultSet.next()) {
                 idMatakuliah = Database.resultSet.getString("kode_matakuliah");
-                Database.disconnect();
             }
         } catch (SQLException e) {
-            Database.disconnect();
             JOptionPane.showMessageDialog(null, "Matakuliah tidak ditemukan! " + e.getMessage());
         }
         return idMatakuliah;

@@ -4,6 +4,7 @@
  */
 package view;
 
+import controller.LoginController;
 import controller.MatakuliahController;
 import controller.UserSession;
 import model.Database;
@@ -28,7 +29,14 @@ public class MenuMahasiswa extends javax.swing.JFrame {
     public MenuMahasiswa() {
         initComponents();
         Database.connect();
+        labelUser();
 
+    }
+    
+    public void labelUser(){
+        LoginController loginController = LoginController.getInstance();
+        String name = UserSession.getInstance().getUserName();
+        JOptionPane.showMessageDialog(null, "Welcome back " + name);
     }
 
     public void table() {
@@ -164,7 +172,7 @@ public class MenuMahasiswa extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabel);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, 880, 190));
-        getContentPane().add(fileTugasField, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, 180, 30));
+        getContentPane().add(fileTugasField, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 290, 180, 30));
         fileTugasField.setEditable(false);
         fileTugasField.setFocusable(false);
 
@@ -184,12 +192,13 @@ public class MenuMahasiswa extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(0, 155, 76));
         jLabel3.setText("Keterangan Tugas");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, -1, 40));
-        getContentPane().add(idTugasField, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 250, 180, 30));
+        getContentPane().add(idTugasField, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 180, 30));
         idTugasField.setEditable(false);
         idTugasField.setFocusable(false);
 
+        jLabel4.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
         jLabel4.setText("Keterangan Tugas");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 250, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 260, 140, -1));
 
         kumpulButton.setText("Kumpul");
         kumpulButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -212,7 +221,7 @@ public class MenuMahasiswa extends javax.swing.JFrame {
         getContentPane().add(backMenuButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, -1, -1));
 
         matakuliahChoose.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pilih Mata Kuliah", "Basis Data Lanjut", "Dasar Dasar Pengembangan Perangkat Lunak", "Desain dan Manajemen Jaringan Komputer", "Desain Basis Data", "Interaksi Manusia dan Komputer", "Manajemen Layanan IT", "Manajemen Proses Bisnis", "Pemrograman Berorientasi Objek", "Riset Operasi" }));
-        getContentPane().add(matakuliahChoose, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 332, 180, 30));
+        getContentPane().add(matakuliahChoose, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 330, 180, 30));
 
         refreshButton.setText("Refresh");
         refreshButton.addMouseListener(new java.awt.event.MouseAdapter() {

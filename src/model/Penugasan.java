@@ -3,12 +3,15 @@ package model;
 
 import javax.swing.*;
 import java.sql.SQLException;
-
+/**
+ *
+ * @author fauza
+ */
 public class Penugasan {
     private final String idPenugasan;
-    private final String deadline;
-    private final String title;
-    private final String deskripsi;
+    private String deadline;
+    private String title;
+    private String deskripsi;
     private final String kodeMatakuliah;
 
     public Penugasan(String idPenugasan, String deadline, String title, String deskripsi, String kodeMatakuliah){
@@ -19,27 +22,27 @@ public class Penugasan {
         this.kodeMatakuliah = kodeMatakuliah;
     }
 
-    public String getDeadline(){
+    public final String getDeadline(){
         return this.deadline;
     }
 
-    public String getDeskripsi(){
+    public final String getDeskripsi(){
         return this.deskripsi;
     }
 
-    public String getTitle(){
+    public final String getTitle(){
         return this.title;
     }
 
-    public String getIdPenugasan(){
+    public final String getIdPenugasan(){
         return this.idPenugasan;
     }
     
-    public String getKodeMataKuliah(){
+    public final String getKodeMataKuliah(){
         return this.kodeMatakuliah;
     }
 
-    public void createPenugasan() {
+    public final void createPenugasan() {
         try {
             String query = "INSERT INTO penugasan (id_tugas, deadline, title, deskripsi, matakuliah_kode_matakuliah) VALUES (?, ?, ?, ?, ?)";
             Database.preparedStatement = Database.connection.prepareStatement(query);
@@ -61,7 +64,7 @@ public class Penugasan {
         }
     }
 
-    public void deletePenugasan() {
+    public final void deletePenugasan() {
         try {
             String query = "DELETE FROM penugasan WHERE id_tugas = ?";
             Database.preparedStatement = Database.connection.prepareStatement(query);
@@ -77,7 +80,7 @@ public class Penugasan {
         }
     }
 
-    public void updatePenugasan(){
+    public final void updatePenugasan(){
         try {
             String query = "UPDATE penugasan SET deadline = ?, title = ?, deskripsi = ? WHERE id_tugas = ?";
             Database.preparedStatement = Database.connection.prepareStatement(query);

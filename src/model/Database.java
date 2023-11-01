@@ -10,7 +10,6 @@ import java.sql.*;
  *
  * @author fauza
  */
-
 public class Database {
     public static Connection connection = null;
 
@@ -32,7 +31,7 @@ public class Database {
         }
     }
 
-    public static Connection connect(){
+    public final static Connection connect(){
         try {
             String url = "jdbc:mysql://" + DB_HOST + "/" + DB_NAME;
             connection = DriverManager.getConnection(url, DB_USERNAME, DB_PASSWORD);
@@ -43,7 +42,7 @@ public class Database {
         return connection;
     }
 
-    public static void disconnect() {
+    public final static void disconnect() {
         try {
             connection.close();
             System.out.println("Database disconnected!");

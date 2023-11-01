@@ -1,12 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
 import javax.swing.*;
 import java.sql.SQLException;
-
 /**
  *
  * @author fauza
@@ -26,19 +21,19 @@ public class Matakuliah {
         this.name = name;
     }
 
-    public String getId(){
+    public final String getId(){
         return this.id;
     }
 
-    public String getName(){
+    public final String getName(){
         return this.name;
     }
 
-    public String getIdDosen(){
+    public final String getIdDosen(){
         return this.idDosen;
     }
 
-    public String getIdMatakuliah() {
+    public final String getIdMatakuliah() {
         String idMatakuliah = null;
 
         try {

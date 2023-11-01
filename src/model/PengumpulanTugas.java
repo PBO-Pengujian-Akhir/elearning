@@ -2,14 +2,17 @@ package model;
 
 import javax.swing.*;
 import java.sql.SQLException;
-
+/**
+ *
+ * @author fauza
+ */
 public class PengumpulanTugas {
-    private String idPengumpulan;
-    private String idMahasiswa;
-    private String lampiran;
-    private String tanggalPengumpulan;
-    private String status;
-    private String idTugas;
+    private final String idPengumpulan;
+    private final String idMahasiswa;
+    private final String lampiran;
+    private final String tanggalPengumpulan;
+    private final String status;
+    private final String idTugas;
 
     public PengumpulanTugas(String idPengumpulan, String lampiran, String tanggalPengumpulan, String status, String idMahasiswa, String idTugas){
         this.idPengumpulan = idPengumpulan;
@@ -20,31 +23,31 @@ public class PengumpulanTugas {
         this.idTugas = idTugas;
     }
 
-    public String getIdPengumpulan(){
+    public final String getIdPengumpulan(){
         return this.idPengumpulan;
     }
 
-    public String getLampiran(){
+    public final String getLampiran(){
         return this.lampiran;
     }
 
-    public String getTanggalPengumpulan(){
+    public final String getTanggalPengumpulan(){
         return this.tanggalPengumpulan;
     }
 
-    public String getStatus(){
+    public final String getStatus(){
         return this.status;
     }
 
-    public String getIdTugas(){
+    public final String getIdTugas(){
         return this.idTugas;
     }
 
-    public String getIdMahasiswa(){
+    public final String getIdMahasiswa(){
         return this.idMahasiswa;
     }
 
-    public void createPengumpulanTugas(){
+    public final void createPengumpulanTugas(){
         try {
             String query = "INSERT INTO pengumpulan_tugas (id_pengumpulan, lampiran, tanggal_pengumpulan, status, mahasiswa_nim, penugasan_id_tugas) VALUES (?, ?, ?, ?, ?, ?)";
             Database.preparedStatement = Database.connection.prepareStatement(query);

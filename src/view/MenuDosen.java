@@ -11,11 +11,14 @@ import java.sql.Statement;
 import java.sql.PreparedStatement;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.time.LocalDate;
 import java.util.UUID;
 
 import controller.PenugasanController;
 import controller.LoginController;
 import controller.UserSession;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import model.*;
 
 /**
@@ -24,7 +27,6 @@ import model.*;
  */
 public final class MenuDosen extends javax.swing.JFrame {
     int xx, xy;
-
     /**
          * Creates new form CreateAssignment
          */
@@ -33,8 +35,15 @@ public final class MenuDosen extends javax.swing.JFrame {
         table();
         Database.connect();
         clear();
+        labelUser();
     }
 
+    public void labelUser(){
+        LoginController loginController = LoginController.getInstance();
+        String name = UserSession.getInstance().getUserName();
+        JOptionPane.showMessageDialog(null, "Welcome back " + name);
+    }
+    
     void clear(){
         assignment.setText("");
         dateChooser.setText("");
@@ -71,14 +80,13 @@ public final class MenuDosen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        dateChooser1 = new com.raven.datechooser.DateChooser();
+        date = new com.raven.datechooser.DateChooser();
         deskripsiName = new javax.swing.JLabel();
         matakuliahName = new javax.swing.JLabel();
         namaTugasName = new javax.swing.JLabel();
         deadlineName = new javax.swing.JLabel();
         assignment = new javax.swing.JTextField();
         dateChooser = new javax.swing.JTextField();
-        deskripsiField = new javax.swing.JTextField();
         matakuliah = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         dataTable = new javax.swing.JTable();
@@ -90,11 +98,14 @@ public final class MenuDosen extends javax.swing.JFrame {
         titleDashboard = new javax.swing.JLabel();
         dateButton = new javax.swing.JButton();
         backMenuButton = new javax.swing.JLabel();
+        usernameLabel = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        deskripsiField = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
-        dateChooser1.setForeground(new java.awt.Color(0, 155, 76));
-        dateChooser1.setDateFormat("yyyy-MM-dd");
-        dateChooser1.setTextRefernce(dateChooser);
+        date.setDateFormat("yyyy-MM-dd");
+        date.setTextRefernce(dateChooser);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -102,7 +113,7 @@ public final class MenuDosen extends javax.swing.JFrame {
 
         deskripsiName.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
         deskripsiName.setText("Deskripsi Tugas");
-        getContentPane().add(deskripsiName, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 260, -1, 30));
+        getContentPane().add(deskripsiName, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 300, -1, 30));
 
         matakuliahName.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
         matakuliahName.setText("Mata Kuliah");
@@ -110,7 +121,7 @@ public final class MenuDosen extends javax.swing.JFrame {
 
         namaTugasName.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
         namaTugasName.setText("Nama Tugas");
-        getContentPane().add(namaTugasName, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, -1, 30));
+        getContentPane().add(namaTugasName, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, 120, 30));
 
         deadlineName.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
         deadlineName.setText("Deadline");
@@ -126,9 +137,8 @@ public final class MenuDosen extends javax.swing.JFrame {
         getContentPane().add(dateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 340, 280, 30));
         dateChooser.setEditable(false);
         dateChooser.setFocusable(false);
-        getContentPane().add(deskripsiField, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 300, 330, 130));
 
-        matakuliah.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Basis Data Lanjut", "Dasar Dasar Pengembangan Perangkat Lunak", "Desain dan Manajemen Jaringan Komputer", "Desain Basis Data", "Interaksi Manusia dan Komputer", "Manajemen Layanan IT", "Manajemen Proses Bisnis Pemrograman Berorientasi Objek", "Riset Operasi" }));
+        matakuliah.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pilih Mata Kuliah", "Basis Data Lanjut", "Dasar Dasar Pengembangan Perangkat Lunak", "Desain dan Manajemen Jaringan Komputer", "Desain Basis Data", "Interaksi Manusia dan Komputer", "Manajemen Layanan IT", "Manajemen Proses Bisnis Pemrograman Berorientasi Objek", "Riset Operasi" }));
         getContentPane().add(matakuliah, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 300, 280, 30));
 
         dataTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -220,17 +230,21 @@ public final class MenuDosen extends javax.swing.JFrame {
         });
         getContentPane().add(backMenuButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, -1, -1));
 
+        usernameLabel.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
+        usernameLabel.setText("NAMA DOSEN");
+        getContentPane().add(usernameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, -1, 30));
+
+        deskripsiField.setColumns(20);
+        deskripsiField.setRows(5);
+        jScrollPane2.setViewportView(deskripsiField);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 330, 320, -1));
+
+        jLabel1.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
+        jLabel1.setText("Welcome back!");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 220, -1, 30));
+
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/dashboardForm.png"))); // NOI18N
-        background.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                backgroundMouseDragged(evt);
-            }
-        });
-        background.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                backgroundMousePressed(evt);
-            }
-        });
         getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
@@ -245,6 +259,13 @@ public final class MenuDosen extends javax.swing.JFrame {
             String kodeMatakuliah = PenugasanController.getIdMatakuliah(matakuliah.getSelectedItem().toString());
             String idPenugasan = "TGS-" + UUID.randomUUID().toString().substring(0, 5).toUpperCase();
             String deadline = dateChooser.getText();
+            LocalDate today = LocalDate.now();
+            LocalDate deadlineDate = LocalDate.parse(deadline);
+
+            if (deadlineDate.isBefore(today)) {
+                JOptionPane.showMessageDialog(null, "Deadline tidak boleh hari ini atau di masa lalu!");
+                return;
+            }
             String titleTugas = assignment.getText();
             String deskripsi = deskripsiField.getText();
 
@@ -252,6 +273,7 @@ public final class MenuDosen extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Please fill all the fields!");
             } else {
                 PenugasanController.createTugasButton(idPenugasan, deadline, titleTugas, deskripsi, kodeMatakuliah);
+                table();
                 clear();
             }
         } catch (Exception ex) {
@@ -270,6 +292,7 @@ public final class MenuDosen extends javax.swing.JFrame {
                 String kodeMatakuliah = model.getValueAt(row, 4).toString();
 
                 PenugasanController.deleteTugasButton(idPenugasan, null, null, null, kodeMatakuliah);
+                table();
                 model.removeRow(row);
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
@@ -284,23 +307,12 @@ public final class MenuDosen extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_closeButtonMouseClicked
 
-    private void backgroundMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backgroundMousePressed
-        xx = evt.getX();
-        xy = evt.getY();
-    }//GEN-LAST:event_backgroundMousePressed
-
-    private void backgroundMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backgroundMouseDragged
-        int x = evt.getXOnScreen();
-        int y = evt.getYOnScreen();
-        this.setLocation(x - xx, y - xy);
-    }//GEN-LAST:event_backgroundMouseDragged
-
     private void dateChooserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateChooserActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_dateChooserActionPerformed
 
     private void dateButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dateButtonMouseClicked
-        dateChooser1.showPopup();
+        date.showPopup();
     }//GEN-LAST:event_dateButtonMouseClicked
 
     private void showTugasButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showTugasButtonMouseClicked
@@ -423,19 +435,22 @@ public final class MenuDosen extends javax.swing.JFrame {
     private javax.swing.JLabel closeButton;
     private javax.swing.JButton createTugasButton;
     private javax.swing.JTable dataTable;
+    private com.raven.datechooser.DateChooser date;
     private javax.swing.JButton dateButton;
     private javax.swing.JTextField dateChooser;
-    private com.raven.datechooser.DateChooser dateChooser1;
     private javax.swing.JLabel deadlineName;
     private javax.swing.JButton deleteTugasButton;
-    private javax.swing.JTextField deskripsiField;
+    private javax.swing.JTextArea deskripsiField;
     private javax.swing.JLabel deskripsiName;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JComboBox<String> matakuliah;
     private javax.swing.JLabel matakuliahName;
     private javax.swing.JLabel namaTugasName;
     private javax.swing.JButton showTugasButton;
     private javax.swing.JLabel titleDashboard;
     private javax.swing.JButton updateTugasButton;
+    private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
 }

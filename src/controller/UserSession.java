@@ -4,12 +4,15 @@
  */
 package controller;
 
+import model.Dosen;
+
 /**
  *
  * @author fauza
  */
 public class UserSession {
     private String userId;
+    private String userName;
 
     private static UserSession instance;
 
@@ -27,6 +30,14 @@ public class UserSession {
         this.userId = userId;
     }
 
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
     public String getUserId() {
         return userId;
     }
@@ -36,7 +47,8 @@ public class UserSession {
     }
 
     public boolean isUserLoggedIn() {
-        return userId != null;
+        return userId != null && userName != null;
     }
+
 
 }

@@ -6,6 +6,7 @@ package view;
 
 import controller.LoginController;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -18,8 +19,6 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
     }
-
-    int xx, xy;
 
     public static Login getInstance() {
         return new Login();
@@ -75,31 +74,10 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 370, 130, 50));
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/loginForm.png"))); // NOI18N
-        background.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                backgroundMouseDragged(evt);
-            }
-        });
-        background.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                backgroundMousePressed(evt);
-            }
-        });
         getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void backgroundMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backgroundMousePressed
-        xx = evt.getX();
-        xy = evt.getY();
-    }//GEN-LAST:event_backgroundMousePressed
-
-    private void backgroundMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backgroundMouseDragged
-        int x = evt.getXOnScreen();
-        int y = evt.getYOnScreen();
-        this.setLocation(x - xx, y - xy);
-    }//GEN-LAST:event_backgroundMouseDragged
 
     private void buttonCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCloseMouseClicked
         System.exit(0);
@@ -120,8 +98,7 @@ public class Login extends javax.swing.JFrame {
     private void loginButtonMouseClicked(java.awt.event.MouseEvent evt) {
         String id = idBox.getText();
         String password = passwordField.getText();
-
-        LoginController.getInstance().loginButton(id, password);
+        LoginController.loginButton(id, password);
         this.dispose();
     }
                                         
@@ -162,7 +139,6 @@ public class Login extends javax.swing.JFrame {
                 login.pack();
                 login.setLocationRelativeTo(null);
                 login.setDefaultCloseOperation(Login.EXIT_ON_CLOSE);
-
             }
         });
     }

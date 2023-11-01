@@ -1,7 +1,10 @@
 package controller;
 
 import model.*;
-
+/**
+ *
+ * @author fauza
+ */
 public class MatakuliahController {
 
     public static PenugasanController getInstance() {

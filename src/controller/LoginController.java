@@ -21,7 +21,7 @@ public class LoginController {
         return new LoginController();
     }
 
-    public void loginButton(String id, String password){
+    public static boolean loginButton(String id, String password){
         try {
             Database.connect();
 
@@ -31,8 +31,9 @@ public class LoginController {
                 switch (id.charAt(0)) {
                     case '2' -> {
                         if (Mahasiswa.loginMahasiswa(id, password)) {
-                            MenuMahasiswa dashboardMahasiswa = new MenuMahasiswa();
                             UserSession.getInstance().setUserId(id);
+                            UserSession.getInstance().setUserName(Mahasiswa.getName(id));
+                            MenuMahasiswa dashboardMahasiswa = new MenuMahasiswa();
                             dashboardMahasiswa.setVisible(true);
                             dashboardMahasiswa.pack();
                             dashboardMahasiswa.setLocationRelativeTo(null);
@@ -43,12 +44,13 @@ public class LoginController {
                     }
                     case '1' -> {
                         if (Dosen.loginDosen(id, password)) {
-                            MenuDosen dashboardDosen = new MenuDosen();
                             UserSession.getInstance().setUserId(id);
+                            UserSession.getInstance().setUserName(Dosen.getName(id));
+                            MenuDosen dashboardDosen = new MenuDosen();
                             dashboardDosen.setVisible(true);
                             dashboardDosen.pack();
                             dashboardDosen.setLocationRelativeTo(null);
-                            dashboardDosen.setDefaultCloseOperation(MenuDosen.EXIT_ON_CLOSE);
+                            dashboardDosen.setDefaultCloseOperation(MenuDosen.EXIT_ON_CLOSE);;
                         } else {
                             JOptionPane.showMessageDialog(null, "Login gagal!");
                         }
@@ -60,6 +62,7 @@ public class LoginController {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "An error occurred: " + e.getMessage());
         }
+        return false;
     }
     
 }

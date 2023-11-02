@@ -11,13 +11,16 @@ import java.sql.Statement;
 import java.sql.PreparedStatement;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.UUID;
 
 import controller.PenugasanController;
 import controller.LoginController;
 import controller.UserSession;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import model.*;
 
@@ -39,7 +42,6 @@ public final class MenuDosen extends javax.swing.JFrame {
     }
 
     public void labelUser(){
-        LoginController loginController = LoginController.getInstance();
         String name = UserSession.getInstance().getUserName();
         JOptionPane.showMessageDialog(null, "Welcome back " + name);
     }
@@ -214,8 +216,6 @@ public final class MenuDosen extends javax.swing.JFrame {
         dateChooser.setDateFormatString("yyyy-MM-dd");
         getContentPane().add(dateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 340, 300, 30));
         JTextField dateEditor = (JTextField) dateChooser.getDateEditor().getUiComponent();
-        dateEditor.setEditable(false);
-        dateEditor.setFocusable(false);
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/dashboardForm.png"))); // NOI18N
         getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -231,23 +231,30 @@ public final class MenuDosen extends javax.swing.JFrame {
         try {
             String kodeMatakuliah = PenugasanController.getIdMatakuliah(matakuliah.getSelectedItem().toString());
             String idPenugasan = "TGS-" + UUID.randomUUID().toString().substring(0, 5).toUpperCase();
-            String deadline = dateChooser.getDateFormatString();
-            LocalDate today = LocalDate.now();
-            LocalDate deadlineDate = LocalDate.parse(deadline);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String deadline = dateFormat.format(dateChooser.getDate());
 
-            if (deadlineDate.isBefore(today)) {
-                JOptionPane.showMessageDialog(null, "Deadline tidak boleh hari ini atau di masa lalu!");
-                return;
-            }
-            String titleTugas = assignment.getText();
-            String deskripsi = deskripsiField.getText();
-
-            if (kodeMatakuliah.isEmpty() || deadline.isEmpty() || titleTugas.isEmpty() || deskripsi.isEmpty()) {
+            if (dateChooser.getDate() == null) {
                 JOptionPane.showMessageDialog(null, "Please fill all the fields!");
             } else {
-                PenugasanController.createTugasButton(idPenugasan, deadline, titleTugas, deskripsi, kodeMatakuliah);
-                table();
-                clear();
+                Date date = new Date();
+                String dateNow = dateFormat.format(date);
+                Date date1 = dateFormat.parse(dateNow);
+                Date date2 = dateFormat.parse(deadline);
+                if (date2.compareTo(date1) < 0) {
+                    JOptionPane.showMessageDialog(null, "Deadline must be greater than today's date!");
+                } else {
+                    String titleTugas = assignment.getText();
+                    String deskripsi = deskripsiField.getText();
+
+                    if (kodeMatakuliah.isEmpty() || deadline.isEmpty() || titleTugas.isEmpty() || deskripsi.isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Please fill all the fields!");
+                    } else {
+                        PenugasanController.createTugasButton(idPenugasan, deadline, titleTugas, deskripsi, kodeMatakuliah);
+                        table();
+                        clear();
+                    }
+                }
             }
         } catch (Exception ex) {
             ex.printStackTrace();

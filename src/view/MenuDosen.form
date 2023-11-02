@@ -287,7 +287,7 @@
         <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="JTextField dateEditor = (JTextField) dateChooser.getDateEditor().getUiComponent();&#xa;dateEditor.setEditable(false);&#xa;dateEditor.setFocusable(false);"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="JTextField dateEditor = (JTextField) dateChooser.getDateEditor().getUiComponent();"/>
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

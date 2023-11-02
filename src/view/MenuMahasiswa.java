@@ -164,6 +164,7 @@ public class MenuMahasiswa extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tabel.getTableHeader().setReorderingAllowed(false);
         tabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabelMouseClicked(evt);

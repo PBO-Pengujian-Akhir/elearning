@@ -216,6 +216,8 @@ public final class MenuDosen extends javax.swing.JFrame {
         dateChooser.setDateFormatString("yyyy-MM-dd");
         getContentPane().add(dateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 340, 300, 30));
         JTextField dateEditor = (JTextField) dateChooser.getDateEditor().getUiComponent();
+        dateEditor.setEditable(false);
+        dateEditor.setFocusable(false);
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/dashboardForm.png"))); // NOI18N
         getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -235,20 +237,20 @@ public final class MenuDosen extends javax.swing.JFrame {
             String deadline = dateFormat.format(dateChooser.getDate());
 
             if (dateChooser.getDate() == null) {
-                JOptionPane.showMessageDialog(null, "Please fill all the fields!");
+                JOptionPane.showMessageDialog(null, "Tolong isi semuanya!");
             } else {
                 Date date = new Date();
                 String dateNow = dateFormat.format(date);
                 Date date1 = dateFormat.parse(dateNow);
                 Date date2 = dateFormat.parse(deadline);
                 if (date2.compareTo(date1) < 0) {
-                    JOptionPane.showMessageDialog(null, "Deadline must be greater than today's date!");
+                    JOptionPane.showMessageDialog(null, "Deadline tidak boleh kurang dari hari ini!");
                 } else {
                     String titleTugas = assignment.getText();
                     String deskripsi = deskripsiField.getText();
 
                     if (kodeMatakuliah.isEmpty() || deadline.isEmpty() || titleTugas.isEmpty() || deskripsi.isEmpty()) {
-                        JOptionPane.showMessageDialog(null, "Please fill all the fields!");
+                        JOptionPane.showMessageDialog(null, "Tolong isi semuanya!");
                     } else {
                         PenugasanController.createTugasButton(idPenugasan, deadline, titleTugas, deskripsi, kodeMatakuliah);
                         table();
@@ -276,7 +278,7 @@ public final class MenuDosen extends javax.swing.JFrame {
                 model.removeRow(row);
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
-            JOptionPane.showMessageDialog(null, "Please select a task to delete.");
+            JOptionPane.showMessageDialog(null, "Pilih tugas yang ingin dihapus!.");
         } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "An error occurred: " + ex.getMessage());
@@ -298,9 +300,11 @@ public final class MenuDosen extends javax.swing.JFrame {
                 DefaultTableModel model = (DefaultTableModel) dataTable.getModel();
                 String idPenugasan = model.getValueAt(row, 0).toString();
                 String kodeMatakuliah = model.getValueAt(row, 4).toString();
-                String deadline = dateChooser.getDateFormatString();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String deadline = dateFormat.format(dateChooser.getDate());
+                
                 String titleTugas = assignment.getText();
-                String description = deskripsiField.getText();
+                String description = deskripsiField.getText();  
 
                 if (deadline.isEmpty() || titleTugas.isEmpty() || description.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Please fill all the fields!");

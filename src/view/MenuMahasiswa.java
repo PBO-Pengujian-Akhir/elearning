@@ -38,6 +38,11 @@ public class MenuMahasiswa extends javax.swing.JFrame {
         String name = UserSession.getInstance().getUserName();
         JOptionPane.showMessageDialog(null, "Welcome back " + name);
     }
+    
+    void clear(){
+        fileTugasField.setText("");
+        
+    }
 
     public void table() {
         DefaultTableModel table = new DefaultTableModel();
@@ -298,6 +303,7 @@ public class MenuMahasiswa extends javax.swing.JFrame {
 
     private void refreshButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshButtonMouseClicked
         table();
+        clear();
     }//GEN-LAST:event_refreshButtonMouseClicked
 
     private void tabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelMouseClicked

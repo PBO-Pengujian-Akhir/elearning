@@ -302,19 +302,44 @@ public final class MenuDosen extends javax.swing.JFrame {
                 String kodeMatakuliah = model.getValueAt(row, 4).toString();
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 String deadline = dateFormat.format(dateChooser.getDate());
-                
-                String titleTugas = assignment.getText();
-                String description = deskripsiField.getText();  
 
-                if (deadline.isEmpty() || titleTugas.isEmpty() || description.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Please fill all the fields!");
+                if (dateChooser.getDate() == null) {
+                    JOptionPane.showMessageDialog(null, "Tolong isi semuanya!");
                 } else {
-                    PenugasanController.updateTugasButton(idPenugasan, deadline, titleTugas, description, kodeMatakuliah);
+                    Date date = new Date();
+                    String dateNow = dateFormat.format(date);
+                    Date date1 = dateFormat.parse(dateNow);
+                    Date date2 = dateFormat.parse(deadline);
+                    if (date2.compareTo(date1) < 0) {
+                        JOptionPane.showMessageDialog(null, "Deadline tidak boleh kurang dari hari ini!");
+                    } else {
+                        String titleTugas = assignment.getText();
+                        String description = deskripsiField.getText();
 
-                    model.setValueAt(deadline, row, 1);
-                    model.setValueAt(titleTugas, row, 2);
-                    model.setValueAt(description, row, 3);
+                        if (deadline.isEmpty() || titleTugas.isEmpty() || description.isEmpty()) {
+                            JOptionPane.showMessageDialog(null, "Tolong isi semuanya!");
+                        } else {
+                            PenugasanController.updateTugasButton(idPenugasan, deadline, titleTugas, description, kodeMatakuliah);
+
+                            model.setValueAt(deadline, row, 1);
+                            model.setValueAt(titleTugas, row, 2);
+                            model.setValueAt(description, row, 3);
+                        }
+                    }
                 }
+                
+//                String titleTugas = assignment.getText();
+//                String description = deskripsiField.getText();  
+//
+//                if (deadline.isEmpty() || titleTugas.isEmpty() || description.isEmpty()) {
+//                    JOptionPane.showMessageDialog(null, "Please fill all the fields!");
+//                } else {
+//                    PenugasanController.updateTugasButton(idPenugasan, deadline, titleTugas, description, kodeMatakuliah);
+//
+//                    model.setValueAt(deadline, row, 1);
+//                    model.setValueAt(titleTugas, row, 2);
+//                    model.setValueAt(description, row, 3);
+//                }
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
             JOptionPane.showMessageDialog(null, "Please select a task to update.");
